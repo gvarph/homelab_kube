@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: apps/victoria-metrics
     helm:
-      valuesFiles:
+      valueFiles:
         - values.yaml
   syncPolicy:
     automated:
