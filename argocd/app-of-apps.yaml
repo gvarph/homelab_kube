@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: app-of-apps
 spec:
-  project: argocd
+  project: default
   source:
     repoURL: https://github.com/gvarph/homelab_kube.git
     targetRevision: main
