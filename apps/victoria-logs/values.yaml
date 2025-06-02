@@ -7,3 +7,6 @@ server:
 persistence:
   enabled: true
   size: 32Gi
+
+podDisruptionBudget:
+  enabled: true
