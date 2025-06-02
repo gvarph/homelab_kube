@@ -6,5 +6,7 @@ pkgs.mkShell {
     pkgs.kubectl
   ];
 
-  KUBECONFIG = /etc/rancher/k3s/k3s.yaml;
+  shellHook = ''
+    export KUBECONFIG=/etc/rancher/k3s/k3s.yaml;
+  '';
 }
