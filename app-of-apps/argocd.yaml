@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: apps/argocd
     helm:
-      valuesFiles:
+      valueFiles:
         - values.yaml
   syncPolicy:
     automated:
