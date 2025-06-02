@@ -14,5 +14,5 @@ victoria-metrics-k8s-stack:
           - name: VictoriaLogs
             type: victoriametrics-logs-datasource
             access: proxy
-            url: http://victoria-logs.victoria-logs.svc.cluster.local:9428
+            url: http://victoria-logs-victoria-logs-single-server.victoria-logs.svc.cluster.local:9428
             isDefault: false
