@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/gvarph/homelab_kube.git
+    targetRevision: HEAD
+    path: apps/argocd
+    helm:
+      valuesFiles:
+        - values.yaml
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+

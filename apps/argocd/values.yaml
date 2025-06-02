@@ -1,0 +1,15 @@
+configs:
+  params:
+    server.insecure: true
+
+  secret:
+    createSecret: false
+
+server:
+  ingress:
+    enabled: false
+
+
+controller:
+  metrics:
+    enabled: true
