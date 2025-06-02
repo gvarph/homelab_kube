@@ -1,12 +1,13 @@
-vector:
-  enabled: true
+victoria-logs-single:
+  vector:
+    enabled: true
 
-server:
-  enabled: true
+  server:
+    enabled: true
 
-persistence:
-  enabled: true
-  size: 32Gi
+  persistence:
+    enabled: true
+    size: 32Gi
 
-podDisruptionBudget:
-  enabled: true
+  podDisruptionBudget:
+    enabled: true
