@@ -1,0 +1,9 @@
+vector:
+  enabled: true
+
+server:
+  enabled: true
+
+persistence:
+  enabled: true
+  size: 32Gi
