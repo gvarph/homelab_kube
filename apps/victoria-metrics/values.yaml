@@ -3,3 +3,7 @@ victoria-metrics-k8s-stack:
   defaultDashboards:
     annotations:
       argocd.argoproj.io/sync-options: ServerSideApply=true
+  grafana:
+    enabled: true
+    plugins:
+      - victoriametrics-logs-datasource
