@@ -6,6 +6,11 @@ grafana:
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
 
+  # VictoriaMetrics plugins
+  plugins:
+    - victoriametrics-datasource
+    - victoriametrics-logs-datasource
+
   # Configure datasources
   datasources:
     datasources.yaml:
