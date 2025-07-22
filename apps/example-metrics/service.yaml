@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-metrics
+  namespace: example-metrics
+  labels:
+    app: example-metrics
+  annotations:
+    # Prometheus/VictoriaMetrics scraping annotations
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8080"
+    prometheus.io/path: "/metrics"
+    prometheus.io/scheme: "http"
+    # VictoriaMetrics specific annotations (optional, but good practice)
+    vm.io/scrape: "true"
+    vm.io/port: "8080"
+    vm.io/path: "/metrics"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: example-metrics
