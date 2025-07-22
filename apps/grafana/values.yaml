@@ -54,11 +54,11 @@ grafana:
       victoriametrics-cluster:
         gnetId: 11176
         revision: 42
-        datasource: VictoriaMetrics
+        datasource: VictoriaMetrics-Prometheus
       kubernetes:
         gnetId: 14205
         revision: 1
-        datasource: VictoriaMetrics
+        datasource: VictoriaMetrics-Prometheus
 
   # Admin credentials
   adminPassword: admin
