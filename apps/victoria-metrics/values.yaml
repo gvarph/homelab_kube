@@ -4,7 +4,5 @@ victoria-metrics-k8s-stack:
     enabled: true
     annotations:
       argocd.argoproj.io/sync-options: ServerSideApply=true
-      grafana_folder: "VictoriaMetrics Default Dashboards"
-      grafana_dashboard: "1"
   grafana:
     enabled: false
