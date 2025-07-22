@@ -98,7 +98,6 @@ grafana:
   # Environment variables for VictoriaMetrics integration
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
-    GF_INSTALL_PLUGINS: "victoriametrics-datasource,victoriametrics-logs-datasource"
 
   # Grafana configuration
   grafana.ini:
