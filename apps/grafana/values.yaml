@@ -2,10 +2,10 @@ grafana:
   # Admin credentials
   adminPassword: admin
 
-  # Enable plugins for VictoriaMetrics and VictoriaLogs
-  plugins:
-    - victoriametrics-datasource
-    - victoriametrics-logs-datasource
+  # Enable plugins for VictoriaMetrics and VictoriaLogs via environment variable
+  env:
+    GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
+    GF_INSTALL_PLUGINS: "victoriametrics-datasource,victoriametrics-logs-datasource"
 
   # Configure datasources
   datasources:
@@ -95,9 +95,7 @@ grafana:
     runAsUser: 472
     fsGroup: 472
 
-  # Environment variables for VictoriaMetrics integration
-  env:
-    GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
+
 
   # Grafana configuration
   grafana.ini:
