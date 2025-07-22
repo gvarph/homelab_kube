@@ -6,10 +6,10 @@ grafana:
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
 
-  # Install plugins using the official method
-  plugins:
-    - victoriametrics-datasource
-    - victoriametrics-logs-datasource
+  # Temporarily disable plugins to get Grafana running
+  # plugins:
+  #   - victoriametrics-datasource
+  #   - victoriametrics-logs-datasource
 
   # Configure datasources
   datasources:
