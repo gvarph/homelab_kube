@@ -8,7 +8,7 @@ grafana:
 
   # VictoriaMetrics plugins
   plugins:
-#    - victoriametrics-datasource
+    - victoriametrics-metrics-datasource
     - victoriametrics-logs-datasource
 
   # Configure datasources
@@ -16,7 +16,7 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
-        # VictoriaMetrics native datasource for metrics (recommended)
+        # VictoriaMetrics native datasource for metrics 
         - name: VictoriaMetrics
           type: victoriametrics-datasource
           access: proxy
