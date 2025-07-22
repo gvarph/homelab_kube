@@ -9,3 +9,11 @@ victoria-metrics-k8s-stack:
       grafana_dashboard: "1"
   grafana:
     enabled: false
+  
+  # Enable annotation-based service discovery
+  vmagent:
+    spec:
+      # Add additional scrape configs for Prometheus annotation-based discovery
+      additionalScrapeConfigs:
+        name: prometheus-additional-configs
+        key: prometheus-additional.yaml
