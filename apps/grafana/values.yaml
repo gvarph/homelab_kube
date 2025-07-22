@@ -6,19 +6,10 @@ grafana:
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
 
-  # Install plugins via init container
-  extraInitContainers:
-    - name: install-plugins
-      image: grafana/grafana:12.0.2
-      command: 
-        - sh
-        - -c
-        - |
-          grafana-cli plugins install victoriametrics-datasource
-          grafana-cli plugins install victoriametrics-logs-datasource
-      volumeMounts:
-        - name: storage
-          mountPath: /var/lib/grafana
+  # Install plugins using the official method
+  plugins:
+    - victoriametrics-datasource
+    - victoriametrics-logs-datasource
 
   # Configure datasources
   datasources:
