@@ -99,6 +99,10 @@ grafana:
     runAsUser: 472
     fsGroup: 472
 
+  # Disable problematic init container
+  initChownData:
+    enabled: false
+
 
 
   # Grafana configuration
