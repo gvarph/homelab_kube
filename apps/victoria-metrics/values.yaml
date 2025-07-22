@@ -16,3 +16,10 @@ victoria-metrics-k8s-stack:
             access: proxy
             url: http://victoria-logs-victoria-logs-single-server.victoria-logs.svc.cluster.local:9428
             isDefault: false
+          - name: VictoriaLogs-Loki
+            type: loki
+            access: proxy
+            url: http://victoria-logs-victoria-logs-single-server.victoria-logs.svc.cluster.local:9428/select/logsql/loki
+            isDefault: false
+            jsonData:
+              maxLines: 1000
