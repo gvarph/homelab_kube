@@ -69,9 +69,6 @@ grafana:
   # Environment variables
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
-    GF_LOG_MODE: "console"
-    GF_LOG_LEVEL: "info"
-    GF_LOG_CONSOLE_FORMAT: "json"
 
   # VictoriaMetrics plugins
   plugins:
@@ -153,3 +150,13 @@ grafana:
       cpu: 250m
       memory: 256Mi
 
+  securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    fsGroup: 65534
+  initChownData:
+    enabled: true
+    securityContext:
+      runAsUser: 65534
+      runAsGroup: 65534
