@@ -16,14 +16,13 @@ spec:
         app: example-metrics
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"   # optional if not /metrics
-        prometheus.io/port: "8080"       # or whatever port your app uses
+        prometheus.io/port: "9100"       
     spec:
       containers:
       - name: example-metrics
         image: prom/node-exporter
         ports:
-        - containerPort: 8080
+        - containerPort: 9100
           name: http
         resources:
           requests:
