@@ -1,8 +1,8 @@
 victoria-metrics-k8s-stack:
   fullnameOverride: vm-k8s-stack
   defaultDashboards:
+    enabled: true
     annotations:
       argocd.argoproj.io/sync-options: ServerSideApply=true
-    enabled: true
   grafana:
     enabled: false

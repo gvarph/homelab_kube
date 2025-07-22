@@ -12,6 +12,7 @@ grafana:
         editable: true
         options:
           path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+
       - name: 'default'
         orgId: 1
         folder: ''
@@ -20,6 +21,7 @@ grafana:
         editable: true
         options:
           path: /var/lib/grafana/dashboards/default
+
       - name: 'autodiscovered'
         orgId: 1
         folder: 'autodiscovered'
@@ -47,15 +49,16 @@ grafana:
       k8s-views-pods:
         url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
         token: ''
+
     default:
       victoriametrics:
         gnetId: 10229
         revision: 22
-        datasource: 
+        datasource: VictoriaMetrics
       kubernetes:
         gnetId: 14205
         revision: 1
-        datasource: victoriametrics
+        datasource: VictoriaMetrics
 
   # Admin credentials
   adminPassword: admin
@@ -84,7 +87,7 @@ grafana:
             httpMethod: POST
             customQueryParameters: ""
         
-        # Prometheus-compatible datasource for VictoriaMetrics (alternative)
+        # Prometheus-compatible datasource for VictoriaMetrics 
         - name: VictoriaMetrics-Prometheus
           type: prometheus
           access: proxy
