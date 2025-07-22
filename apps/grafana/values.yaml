@@ -12,6 +12,15 @@ grafana:
         editable: true
         options:
           path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+
   dashboards:
     grafana-dashboards-kubernetes:
       k8s-system-api-server:
@@ -32,6 +41,15 @@ grafana:
       k8s-views-pods:
         url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
         token: ''
+    default:
+      victoriametrics:
+        gnetId: 10229
+        revision: 22
+        datasource: 
+      kubernetes:
+        gnetId: 14205
+        revision: 1
+        datasource: victoriametrics
 
   # Admin credentials
   adminPassword: admin
