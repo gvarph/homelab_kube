@@ -69,6 +69,9 @@ grafana:
   # Environment variables
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
+    GF_LOG_MODE: "console"
+    GF_LOG_LEVEL: "info"
+    GF_LOG_CONSOLE_FORMAT: "json"
 
   # VictoriaMetrics plugins
   plugins:
