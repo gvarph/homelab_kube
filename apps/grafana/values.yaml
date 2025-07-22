@@ -2,10 +2,23 @@ grafana:
   # Admin credentials
   adminPassword: admin
 
-  # Enable plugins for VictoriaMetrics and VictoriaLogs via environment variable
+  # Environment variables
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
-    GF_INSTALL_PLUGINS: "victoriametrics-datasource,victoriametrics-logs-datasource"
+
+  # Install plugins via init container
+  extraInitContainers:
+    - name: install-plugins
+      image: grafana/grafana:12.0.2
+      command: 
+        - sh
+        - -c
+        - |
+          grafana-cli plugins install victoriametrics-datasource
+          grafana-cli plugins install victoriametrics-logs-datasource
+      volumeMounts:
+        - name: storage
+          mountPath: /var/lib/grafana
 
   # Configure datasources
   datasources:
