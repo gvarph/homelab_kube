@@ -5,7 +5,6 @@ grafana:
   # Environment variables
   env:
     GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
-    GF_INSTALL_PLUGINS: "victoriametrics-datasource,victoriametrics-logs-datasource"
 
   # Configure datasources
   datasources:
