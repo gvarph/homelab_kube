@@ -20,7 +20,7 @@ grafana:
         - name: VictoriaMetrics
           type: victoriametrics-datasource
           access: proxy
-          url: http://vm-k8s-stack-vmsingle.victoria-metrics.svc.cluster.local:8429
+          url: http://vmsingle-vm-k8s-stack.victoria-metrics.svc.cluster.local:8429
           isDefault: true
           jsonData:
             httpMethod: POST
@@ -30,7 +30,7 @@ grafana:
         - name: VictoriaMetrics-Prometheus
           type: prometheus
           access: proxy
-          url: http://vm-k8s-stack-vmsingle.victoria-metrics.svc.cluster.local:8429/prometheus
+          url: http://vmsingle-vm-k8s-stack.victoria-metrics.svc.cluster.local:8429/prometheus
           isDefault: false
           jsonData:
             httpMethod: POST
@@ -65,7 +65,7 @@ grafana:
       label: grafana_dashboard
       labelValue: "1"
       folder: /var/lib/grafana/dashboards
-      defaultFolderName: default
+      defaultFolderName: null
       provider:
         name: default
         orgid: 1
