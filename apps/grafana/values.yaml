@@ -127,10 +127,9 @@ grafana:
     dashboards:
       enabled: true
       label: grafana_dashboard
+      labelValue: "1"
       folder: /var/lib/grafana/dashboards/autodiscovered
       searchNamespace: ALL
-      additionalDashboardLabels:
-        some-label-key: some-value
 
   # Persistence
   persistence:
