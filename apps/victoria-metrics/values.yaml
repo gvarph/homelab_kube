@@ -5,4 +5,4 @@ victoria-metrics-k8s-stack:
     annotations:
       argocd.argoproj.io/sync-options: ServerSideApply=true
   grafana:
-    enabled: true
+    enabled: false
