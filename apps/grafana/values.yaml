@@ -55,6 +55,7 @@ grafana:
 
   # Provision grafana-dashboards-kubernetes
   dashboardProviders:
+    enabled: true
     dashboardproviders.yaml:
       apiVersion: 1
       providers:
