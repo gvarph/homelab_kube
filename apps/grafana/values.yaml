@@ -93,28 +93,3 @@ grafana:
       cpu: 250m
       memory: 256Mi
 
-  # Security context
-  securityContext:
-    runAsNonRoot: true
-    runAsUser: 472
-    fsGroup: 472
-
-  # Disable problematic init container
-  initChownData:
-    enabled: false
-
-
-
-  # Grafana configuration
-  grafana.ini:
-    server:
-      root_url: "%(protocol)s://%(domain)s:%(http_port)s/"
-    analytics:
-      check_for_updates: false
-      check_for_plugin_updates: false
-    log:
-      mode: console
-    grafana_net:
-      url: https://grafana.net
-    auth.anonymous:
-      enabled: false
