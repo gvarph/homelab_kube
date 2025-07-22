@@ -8,18 +8,18 @@ metadata:
   annotations:
     # Prometheus/VictoriaMetrics scraping annotations
     prometheus.io/scrape: "true"
-    prometheus.io/port: "8080"
+    prometheus.io/port: "9100"
     prometheus.io/path: "/metrics"
     prometheus.io/scheme: "http"
     # VictoriaMetrics specific annotations (optional, but good practice)
     vm.io/scrape: "true"
-    vm.io/port: "8080"
+    vm.io/port: "9100"
     vm.io/path: "/metrics"
 spec:
   type: ClusterIP
   ports:
-  - port: 8080
-    targetPort: 8080
+  - port: 9100
+    targetPort: 9100
     protocol: TCP
     name: http
   selector:
