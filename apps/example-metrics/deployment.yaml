@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: example-metrics
-        image: prometheus-example-app:latest
+        image: nilebox/prometheus-example-app:latest
         ports:
         - containerPort: 8080
           name: http
