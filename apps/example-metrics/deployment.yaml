@@ -5,6 +5,10 @@ metadata:
   namespace: example-metrics
   labels:
     app: example-metrics
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"   # optional if not /metrics
+    prometheus.io/port: "8080"       # or whatever port your app uses
 spec:
   replicas: 1
   selector:
