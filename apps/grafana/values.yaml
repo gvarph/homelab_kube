@@ -107,7 +107,6 @@ grafana:
         type: file
         disableDelete: false
         allowUiUpdates: true
-        da
 
   # Persistence
   persistence:
