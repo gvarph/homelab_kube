@@ -1,0 +1,115 @@
+grafana:
+  # Admin credentials
+  adminPassword: admin
+
+  # Enable plugins for VictoriaMetrics and VictoriaLogs
+  plugins:
+    - victoriametrics-datasource
+    - victoriametrics-logs-datasource
+
+  # Configure datasources
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        # VictoriaMetrics native datasource for metrics (recommended)
+        - name: VictoriaMetrics
+          type: victoriametrics-datasource
+          access: proxy
+          url: http://vm-k8s-stack-vmsingle.victoria-metrics.svc.cluster.local:8429
+          isDefault: true
+          jsonData:
+            httpMethod: POST
+            customQueryParameters: ""
+        
+        # Prometheus-compatible datasource for VictoriaMetrics (alternative)
+        - name: VictoriaMetrics-Prometheus
+          type: prometheus
+          access: proxy
+          url: http://vm-k8s-stack-vmsingle.victoria-metrics.svc.cluster.local:8429/prometheus
+          isDefault: false
+          jsonData:
+            httpMethod: POST
+            prometheusType: Prometheus
+            prometheusVersion: "2.40.0"
+        
+        # VictoriaLogs native datasource
+        - name: VictoriaLogs
+          type: victoriametrics-logs-datasource
+          access: proxy
+          url: http://victoria-logs-victoria-logs-single-server.victoria-logs.svc.cluster.local:9428
+          isDefault: false
+        
+        # VictoriaLogs Loki-compatible datasource
+        - name: VictoriaLogs-Loki
+          type: loki
+          access: proxy
+          url: http://victoria-logs-victoria-logs-single-server.victoria-logs.svc.cluster.local:9428/select/logsql/loki
+          isDefault: false
+          jsonData:
+            maxLines: 1000
+
+  # Enable sidecar for automatic dashboard and datasource discovery
+  sidecar:
+    datasources:
+      enabled: true
+      initDatasources: true
+      label: grafana_datasource
+      labelValue: "1"
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      labelValue: "1"
+      folder: /var/lib/grafana/dashboards
+      defaultFolderName: default
+      provider:
+        name: default
+        orgid: 1
+        folder: ''
+        type: file
+        disableDelete: false
+        allowUiUpdates: true
+
+  # Persistence
+  persistence:
+    enabled: true
+    size: 10Gi
+
+  # Service configuration
+  service:
+    type: ClusterIP
+    port: 80
+
+  # Resource limits
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+  # Security context
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 472
+    fsGroup: 472
+
+  # Environment variables for VictoriaMetrics integration
+  env:
+    GF_FEATURE_TOGGLES_ENABLE: "publicDashboards"
+    GF_INSTALL_PLUGINS: "victoriametrics-datasource,victoriametrics-logs-datasource"
+
+  # Grafana configuration
+  grafana.ini:
+    server:
+      root_url: "%(protocol)s://%(domain)s:%(http_port)s/"
+    analytics:
+      check_for_updates: false
+      check_for_plugin_updates: false
+    log:
+      mode: console
+    grafana_net:
+      url: https://grafana.net
+    auth.anonymous:
+      enabled: false

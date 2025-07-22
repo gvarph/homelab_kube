@@ -4,22 +4,4 @@ victoria-metrics-k8s-stack:
     annotations:
       argocd.argoproj.io/sync-options: ServerSideApply=true
   grafana:
-    enabled: true
-    plugins:
-      - victoriametrics-logs-datasource
-    datasources:
-      datasources.yaml:
-        apiVersion: 1
-        datasources:
-          - name: VictoriaLogs
-            type: victoriametrics-logs-datasource
-            access: proxy
-            url: http://victoria-logs-victoria-logs-single-server.victoria-logs.svc.cluster.local:9428
-            isDefault: false
-          - name: VictoriaLogs-Loki
-            type: loki
-            access: proxy
-            url: http://victoria-logs-victoria-logs-single-server.victoria-logs.svc.cluster.local:9428/select/logsql/loki
-            isDefault: false
-            jsonData:
-              maxLines: 1000
+    enabled: false
