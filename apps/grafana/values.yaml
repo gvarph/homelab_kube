@@ -20,6 +20,12 @@ grafana:
         editable: true
         options:
           path: /var/lib/grafana/dashboards/default
+      - name: 'autodiscovered'
+        orgId: 1
+        folder: 'autodiscovered'
+        type: file
+        options:
+          path: /var/lib/grafana/dashboards/autodiscovered
 
   dashboards:
     grafana-dashboards-kubernetes:
@@ -115,16 +121,10 @@ grafana:
     dashboards:
       enabled: true
       label: grafana_dashboard
-      labelValue: "1"
-      folder: /var/lib/grafana/dashboards
-      defaultFolderName: null
-      provider:
-        name: default
-        orgid: 1
-        folder: ''
-        type: file
-        disableDelete: false
-        allowUiUpdates: true
+      folder: /var/lib/grafana/dashboards/autodiscovered
+      searchNamespace: ALL
+      additionalDashboardLabels:
+        some-label-key: some-value
 
   # Persistence
   persistence:
