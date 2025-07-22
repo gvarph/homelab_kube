@@ -55,6 +55,9 @@ grafana:
         gnetId: 11176
         revision: 42
         datasource: VictoriaMetrics-Prometheus
+      victoriametrics-single:
+        gnetId: 10229
+        datasource: VictoriaMetrics
       kubernetes:
         gnetId: 14205
         revision: 1
