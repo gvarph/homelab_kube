@@ -8,8 +8,8 @@ grafana:
 
   # VictoriaMetrics plugins
   plugins:
-    - victoriametrics-datasource
-#    - victoriametrics-logs-datasource
+#    - victoriametrics-datasource
+    - victoriametrics-logs-datasource
 
   # Configure datasources
   datasources:
