@@ -4,9 +4,10 @@ victoria-logs-single:
 
   server:
     enabled: true
-    annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/port: "9428"
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9428"
 
   persistence:
     enabled: true
