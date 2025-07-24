@@ -8,7 +8,7 @@ victoria-metrics-k8s-stack:
       grafana_folder: victoria_metrics_default_dashboards
       grafana_dashboard: "1"
   grafana:
-    enabled: false
+    enabled: false # We use a dedicated Grafana instance in it's own app
   
   # Enable annotation-based service discovery
   vmagent:

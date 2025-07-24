@@ -22,9 +22,9 @@ grafana:
       #   options:
       #     path: /var/lib/grafana/dashboards/default
 
-      - name: 'autodiscovered'
+      - name: 'default'
         orgId: 1
-        folder: 'autodiscovered'
+        folder: 'default'
         type: file
         options:
           path: /var/lib/grafana/dashboards/autodiscovered
@@ -81,6 +81,8 @@ grafana:
       apiVersion: 1
       datasources:
         # VictoriaMetrics native datasource for metrics 
+        #   Has better performance and some extra features over the 
+        #   prometheus compatible datasource
         - name: VictoriaMetrics
           type: victoriametrics-metrics-datasource
           access: proxy
@@ -91,6 +93,7 @@ grafana:
             customQueryParameters: ""
         
         # Prometheus-compatible datasource for VictoriaMetrics 
+        #   Can be used for some charts that were made specifically for Prometheus
         - name: VictoriaMetrics-Prometheus
           type: prometheus
           access: proxy
@@ -102,6 +105,8 @@ grafana:
             prometheusVersion: "2.40.0"
         
         # VictoriaLogs native datasource
+        #   Has better performance and some extra features over the 
+        #   loki compatible datasource
         - name: VictoriaLogs
           type: victoriametrics-logs-datasource
           access: proxy
@@ -109,6 +114,7 @@ grafana:
           isDefault: false
         
         # VictoriaLogs Loki-compatible datasource
+        #   Can be used for some charts that were made specifically for Loki
         - name: VictoriaLogs-Loki
           type: loki
           access: proxy
