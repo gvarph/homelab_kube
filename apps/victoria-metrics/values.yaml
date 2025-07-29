@@ -10,6 +10,23 @@ victoria-metrics-k8s-stack:
   grafana:
     enabled: false # We use a dedicated Grafana instance in it's own app
   
+  # Disable prometheus.io/scrape annotation on kube-state-metrics to avoid double scraping
+  # since we already use VMServiceScrape for it
+  kube-state-metrics:
+    prometheus:
+      monitor:
+        enabled: false
+    service:
+      annotations:
+        prometheus.io/scrape: "false"
+
+  # Disable prometheus.io/scrape annotation on node-exporter to avoid double scraping
+  # since we already use VMServiceScrape for it
+  prometheus-node-exporter:
+    service:
+      annotations:
+        prometheus.io/scrape: "false"
+
   # Enable annotation-based service discovery
   vmagent:
     spec:
