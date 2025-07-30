@@ -26,9 +26,9 @@ spec:
               memory: "256Mi"       # Limit 256 MiB RAM
 
         - name: cpu-burner
-          image: alpine
+          image: ubuntu
           command:
-            - /bin/sh
+            - /bin/bash
             - -c
             - |
               while true; do
