@@ -31,6 +31,28 @@ spec:
           limits:
             cpu: 100m
             memory: 128Mi
+      - name: cpu-burner
+        image: ubuntu
+        command:
+          - /bin/bash
+          - -c
+          - |
+            while true; do
+              # Compute a hash repeatedly for 5 seconds to burn CPU
+              end=$((SECONDS+5))
+              while [ $SECONDS -lt $end ]; do
+                echo "cpu load test" | sha256sum > /dev/null
+              done
+              echo "cpu load test done"
+              sleep 10
+            done
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
 ---
 apiVersion: v1
 kind: Namespace
