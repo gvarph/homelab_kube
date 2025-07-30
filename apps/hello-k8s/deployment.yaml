@@ -32,13 +32,7 @@ spec:
             - -c
             - |
               while true; do
-                # Compute a hash repeatedly for 5 seconds to burn CPU
-                end=$((SECONDS+5))
-                while [ $SECONDS -lt $end ]; do
-                  echo "cpu load test" | sha256sum > /dev/null
-                done
-                echo "cpu load test done"
-                sleep 10
+                echo "cpu load test" | sha256sum > /dev/null
               done
           resources:
             requests:
