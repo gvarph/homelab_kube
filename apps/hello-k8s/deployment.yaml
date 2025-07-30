@@ -25,3 +25,24 @@ spec:
               cpu: "200m"           # Limit 0.2 CPU cores
               memory: "256Mi"       # Limit 256 MiB RAM
 
+        - name: cpu-burner
+          image: alpine
+          command:
+            - /bin/sh
+            - -c
+            - |
+              while true; do
+                # Compute a hash repeatedly for 5 seconds to burn CPU
+                end=$((SECONDS+5))
+                while [ $SECONDS -lt $end ]; do
+                  echo "cpu load test" | sha256sum > /dev/null
+                done
+                sleep 10
+              done
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
