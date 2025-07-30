@@ -13,6 +13,11 @@ stringData:
         namespaces:
           names: []  # Empty means all namespaces
       relabel_configs:
+      # Exclude victoria-metrics namespace (handled by VMServiceScrape)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: drop
+        regex: victoria-metrics
+      
       # Only scrape services with prometheus.io/scrape=true annotation
       - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
         action: keep
