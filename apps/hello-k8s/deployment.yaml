@@ -37,6 +37,7 @@ spec:
                 while [ $SECONDS -lt $end ]; do
                   echo "cpu load test" | sha256sum > /dev/null
                 done
+                echo "cpu load test done"
                 sleep 10
               done
           resources:
