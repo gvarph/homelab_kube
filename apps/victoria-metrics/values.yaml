@@ -21,6 +21,5 @@ victoria-metrics-k8s-stack:
   kube-state-metrics:
     metricLabelsAllowlist:
       - "pods=[app]"
-      - "containers=[app]"
 
 
