@@ -6,10 +6,31 @@ metadata:
 type: Opaque
 stringData:
   prometheus-additional.yaml: |
-    # ArgoCD server metrics
+    # ArgoCD Application Controller metrics
+    - job_name: 'argocd-metrics'
+      static_configs:
+      - targets: ['argocd-metrics.argocd.svc.cluster.local:8082']
+      metrics_path: '/metrics'
+      scrape_interval: 30s
+    
+    # ArgoCD API Server metrics
     - job_name: 'argocd-server-metrics'
       static_configs:
       - targets: ['argocd-server-metrics.argocd.svc.cluster.local:8083']
+      metrics_path: '/metrics'
+      scrape_interval: 30s
+    
+    # ArgoCD Repo Server metrics
+    - job_name: 'argocd-repo-server-metrics'
+      static_configs:
+      - targets: ['argocd-repo-server.argocd.svc.cluster.local:8084']
+      metrics_path: '/metrics'
+      scrape_interval: 30s
+    
+    # ArgoCD Notifications Controller metrics
+    - job_name: 'argocd-notifications-controller-metrics'
+      static_configs:
+      - targets: ['argocd-notifications-controller-metrics.argocd.svc.cluster.local:9001']
       metrics_path: '/metrics'
       scrape_interval: 30s
     
