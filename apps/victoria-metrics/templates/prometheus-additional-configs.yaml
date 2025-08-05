@@ -6,6 +6,13 @@ metadata:
 type: Opaque
 stringData:
   prometheus-additional.yaml: |
+    # ArgoCD server metrics
+    - job_name: 'argocd-server-metrics'
+      static_configs:
+      - targets: ['argocd-server-metrics.argocd.svc.cluster.local:8083']
+      metrics_path: '/metrics'
+      scrape_interval: 30s
+    
     # Kubernetes service discovery with Prometheus annotations
     - job_name: 'kubernetes-services-prometheus-annotations'
       kubernetes_sd_configs:
