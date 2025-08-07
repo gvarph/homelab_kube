@@ -97,13 +97,13 @@ grafana:
         - name: VictoriaMetrics-Prometheus
           type: prometheus
           access: proxy
-          url: http://vmsingle-vm-k8s-stack.victoria-metrics.svc.cluster.local:8429/prometheus
+          url: http://vmsingle-vm-k8s-stack.victoria-metrics.svc.cluster.local:8429
           isDefault: false
           jsonData:
             httpMethod: POST
             prometheusType: Prometheus
             prometheusVersion: "2.40.0"
-            # Use vmalert service for rules API since VictoriaMetrics doesn't support /api/v1/rules
+
         # VictoriaLogs native datasource
         #   Has better performance and some extra features over the 
         #   loki compatible datasource
