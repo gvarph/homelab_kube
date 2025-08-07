@@ -92,20 +92,18 @@ grafana:
             httpMethod: POST
             customQueryParameters: ""
         
-        # Prometheus-compatible datasource for VictoriaMetrics 
-        #   Can be used for some charts that were made specifically for Prometheus
-        - name: VictoriaMetrics-Prometheus
-          type: prometheus
-          access: proxy
-          url: http://vmsingle-vm-k8s-stack.victoria-metrics.svc.cluster.local:8429/prometheus
-          isDefault: false
-          jsonData:
-            httpMethod: POST
-            prometheusType: Prometheus
-            prometheusVersion: "2.40.0"
-            # Use vmalert service for rules API since VictoriaMetrics doesn't support /api/v1/rules
-            rulesUrl: http://vmalert-vm-k8s-stack.victoria-metrics.svc.cluster.local:8080
-        
+         # Prometheus-compatible datasource for VictoriaMetrics 
+         #   Can be used for some charts that were made specifically for Prometheus
+         - name: VictoriaMetrics-Prometheus
+           type: prometheus
+           access: proxy
+           url: http://vmsingle-vm-k8s-stack.victoria-metrics.svc.cluster.local:8429/prometheus
+           isDefault: false
+           jsonData:
+             httpMethod: POST
+             prometheusType: Prometheus
+             prometheusVersion: "2.40.0"
+             manageAlerts: false        
         # VictoriaLogs native datasource
         #   Has better performance and some extra features over the 
         #   loki compatible datasource
