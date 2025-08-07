@@ -4,6 +4,7 @@ pkgs.mkShell {
     pkgs.kubernetes-helm
     pkgs.argocd
     pkgs.kubectl
+    pkgs.git
   ];
 
   shellHook = ''

@@ -103,8 +103,7 @@ grafana:
             httpMethod: POST
             prometheusType: Prometheus
             prometheusVersion: "2.40.0"
-            # VictoriaMetrics doesn't support /api/v1/rules endpoint
-            # Use vmalert service if you need rules management
+            # Use vmalert service for rules API since VictoriaMetrics doesn't support /api/v1/rules
             rulesUrl: http://vmalert-vm-k8s-stack.victoria-metrics.svc.cluster.local:8080
         
         # VictoriaLogs native datasource
