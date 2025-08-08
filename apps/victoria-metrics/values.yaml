@@ -10,6 +10,20 @@ victoria-metrics-k8s-stack:
   grafana:
     enabled: true # We use a dedicated Grafana instance in it's own app
   
+  # VictoriaMetrics single node configuration
+  vmsingle:
+    enabled: true
+    spec:
+      retentionPeriod: "30d"
+      extraArgs:
+        maxLabelsPerTimeseries: "60"  # Increase from default 40 to 60 (highest seen is 48)
+        loggerFormat: "json"          # Enable structured JSON logging
+      storage:
+        storageClassName: "local-path"
+        accessModes:
+          - ReadWriteOnce
+        size: 20Gi
+
   # Enable annotation-based service discovery
   vmagent:
     spec:
@@ -17,6 +31,13 @@ victoria-metrics-k8s-stack:
       additionalScrapeConfigs:
         name: prometheus-additional-configs
         key: prometheus-additional.yaml
+      extraArgs:
+        loggerFormat: "json"          # Enable structured JSON logging
+
+  vmalert:
+    spec:
+      extraArgs:
+        loggerFormat: "json"          # Enable structured JSON logging
 
   kube-state-metrics:
     metricLabelsAllowlist:

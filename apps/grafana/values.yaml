@@ -63,6 +63,13 @@ grafana:
   #       revision: 1
   #       datasource: VictoriaMetrics-Prometheus
 
+  # Grafana configuration
+  grafana.ini:
+    log:
+      mode: console
+      level: info
+      format: json                    # Enable structured JSON logging
+
   # Admin credentials
   adminPassword: admin
 

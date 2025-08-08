@@ -1,6 +1,9 @@
 victoria-logs-single:
   vector:
     enabled: true
+    env:
+      - name: VECTOR_LOG_FORMAT
+        value: json
 
   server:
     enabled: true
@@ -8,6 +11,9 @@ victoria-logs-single:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9428"
+
+    extraArgs:
+      loggerFormat: json
 
   persistence:
     enabled: true
