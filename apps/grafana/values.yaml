@@ -68,6 +68,7 @@ grafana:
     log:
       mode: console
       level: info
+    log.console:
       format: json                    # Enable structured JSON logging
 
   # Admin credentials
