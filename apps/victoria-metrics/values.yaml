@@ -42,5 +42,16 @@ victoria-metrics-k8s-stack:
   kube-state-metrics:
     metricLabelsAllowlist:
       - "pods=[app]"
+    extraArgs:
+      - --log-format=json          # Enable structured JSON logging
+
+  prometheus-node-exporter:
+    extraArgs:
+      - --log.format=json          # Enable structured JSON logging
+
+  vmalertmanager:
+    spec:
+      extraArgs:
+        loggerFormat: "json"       # Enable structured JSON logging
 
 
