@@ -42,8 +42,8 @@ victoria-metrics-k8s-stack:
   kube-state-metrics:
     metricLabelsAllowlist:
       - "pods=[app]"
-    extraArgs:
-      - --log-format=json          # Enable structured JSON logging
+    # Note: kube-state-metrics doesn't support JSON logging format
+    # It uses standard Go logging which outputs to stderr by default
 
   prometheus-node-exporter:
     extraArgs:
