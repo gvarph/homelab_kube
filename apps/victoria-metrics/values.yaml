@@ -50,8 +50,5 @@ victoria-metrics-k8s-stack:
       - --log.format=json          # Enable structured JSON logging
 
   vmalertmanager:
-    spec:
-      extraArgs:
-        loggerFormat: "json"       # Enable structured JSON logging
-
-
+    extraArgs:
+      - --log.format=json          # Enable structured JSON logging
