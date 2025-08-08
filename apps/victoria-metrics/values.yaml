@@ -8,7 +8,7 @@ victoria-metrics-k8s-stack:
       grafana_folder: victoria_metrics_default_dashboards
       grafana_dashboard: "1"
   grafana:
-    enabled: true # We use a dedicated Grafana instance in it's own app
+    enabled: false # We use a dedicated Grafana instance in it's own app
   
   # VictoriaMetrics single node configuration
   vmsingle:
