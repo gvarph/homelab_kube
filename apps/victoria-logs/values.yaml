@@ -29,3 +29,31 @@ victoria-logs-single:
     labels:
       grafana_folder: victoria_logs_dashboards
       grafana_dashboard: "1"
+
+eventExporter:
+  enabled: true
+  replicaCount: 1
+  logLevel: warn
+  
+  image:
+    repository: ghcr.io/resmoio/kubernetes-event-exporter
+    tag: latest
+    pullPolicy: IfNotPresent
+  
+  victoriaLogs: {}
+  
+  serviceAccount:
+    create: true
+    name: ""
+  
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}

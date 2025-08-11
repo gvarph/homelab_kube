@@ -1,0 +1,39 @@
+{{- if .Values.eventExporter.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "victoria-logs.eventExporter.fullname" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "victoria-logs.labels" . | nindent 4 }}
+    app.kubernetes.io/component: event-exporter
+data:
+  config.yaml: |
+    logLevel: {{ .Values.eventExporter.logLevel | default "warn" }}
+    logFormat: json
+    metricsNamePrefix: event_exporter_
+    route:
+      routes:
+        - match:
+            - receiver: "victoria-logs"
+    receivers:
+      - name: "victoria-logs"
+        webhook:
+          endpoint: "http://{{ .Release.Name }}-victoria-logs-single-server:9428/insert/jsonline?_stream_fields=namespace&_msg_field=_msg&_time_field=_time"
+          headers:
+            Content-Type: "application/stream+json"
+          layout:
+            _msg: "{{ "{{ .Message }}" }}"
+            _time: "{{ "{{ .GetTimestampISO8601 }}" }}"
+            _stream: "{{ "{{ .Namespace }}" }}"
+            event_type: "{{ "{{ .Type }}" }}"
+            reason: "{{ "{{ .Reason }}" }}"
+            kind: "{{ "{{ .InvolvedObject.Kind }}" }}"
+            name: "{{ "{{ .InvolvedObject.Name }}" }}"
+            namespace: "{{ "{{ .Namespace }}" }}"
+            component: "{{ "{{ .Source.Component }}" }}"
+            host: "{{ "{{ .Source.Host }}" }}"
+            count: "{{ "{{ .Count }}" }}"
+            first_timestamp: "{{ "{{ .FirstTimestamp }}" }}"
+            last_timestamp: "{{ "{{ .LastTimestamp }}" }}"
+{{- end }}
