@@ -9,31 +9,46 @@ metadata:
     app.kubernetes.io/component: event-exporter
 data:
   config.yaml: |
-    logLevel: {{ .Values.eventExporter.logLevel | default "warn" }}
+    # Kubernetes Event Exporter Configuration
+    # Exports Kubernetes events to Victoria Logs
+    
+    logLevel: info
     logFormat: json
     metricsNamePrefix: event_exporter_
+    
+    # Route all events to Victoria Logs
     route:
       routes:
         - match:
             - receiver: "victoria-logs"
+    
+    # Victoria Logs webhook receiver
     receivers:
       - name: "victoria-logs"
         webhook:
-          endpoint: "http://{{ .Release.Name }}-victoria-logs-single-server:9428/insert/jsonline?_stream_fields=namespace&_msg_field=_msg&_time_field=_time"
+          endpoint: "http://{{ .Release.Name }}-victoria-logs-single-server:9428/insert/jsonline?_stream_fields=namespace&_msg_field=message&_time_field=timestamp"
           headers:
-            Content-Type: "application/stream+json"
+            Content-Type: "application/x-ndjson"
           layout:
-            _msg: "{{ "{{ .Message }}" }}"
-            _time: "{{ "{{ .GetTimestampISO8601 }}" }}"
-            _stream: "{{ "{{ .Namespace }}" }}"
+            # Main event fields
+            message: "{{ "{{ .Message }}" }}"
+            timestamp: "{{ "{{ .GetTimestampISO8601 }}" }}"
+            
+            # Event classification
             event_type: "{{ "{{ .Type }}" }}"
             reason: "{{ "{{ .Reason }}" }}"
+            
+            # Kubernetes object info
             kind: "{{ "{{ .InvolvedObject.Kind }}" }}"
             name: "{{ "{{ .InvolvedObject.Name }}" }}"
             namespace: "{{ "{{ .Namespace }}" }}"
+            
+            # Source information
             component: "{{ "{{ .Source.Component }}" }}"
             host: "{{ "{{ .Source.Host }}" }}"
+            
+            # Event metadata
             count: "{{ "{{ .Count }}" }}"
-            first_timestamp: "{{ "{{ .FirstTimestamp }}" }}"
-            last_timestamp: "{{ "{{ .LastTimestamp }}" }}"
+            first_seen: "{{ "{{ .FirstTimestamp }}" }}"
+            last_seen: "{{ "{{ .LastTimestamp }}" }}"
 {{- end }}

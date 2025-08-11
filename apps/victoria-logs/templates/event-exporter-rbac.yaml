@@ -1,4 +1,5 @@
 {{- if .Values.eventExporter.enabled }}
+# Service Account for Event Exporter
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -8,6 +9,25 @@ metadata:
     {{- include "victoria-logs.labels" . | nindent 4 }}
     app.kubernetes.io/component: event-exporter
 ---
+# Cluster Role - permissions to read Kubernetes events
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "victoria-logs.eventExporter.fullname" . }}
+  labels:
+    {{- include "victoria-logs.labels" . | nindent 4 }}
+    app.kubernetes.io/component: event-exporter
+rules:
+  # Read access to all resources for event metadata
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["get", "watch", "list"]
+  # Leader election support
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["*"]
+---
+# Bind the service account to the cluster role
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -23,19 +43,4 @@ subjects:
   - kind: ServiceAccount
     namespace: {{ .Release.Namespace }}
     name: {{ include "victoria-logs.eventExporter.serviceAccountName" . }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: {{ include "victoria-logs.eventExporter.fullname" . }}
-  labels:
-    {{- include "victoria-logs.labels" . | nindent 4 }}
-    app.kubernetes.io/component: event-exporter
-rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["get", "watch", "list"]
-- apiGroups: ["coordination.k8s.io"]
-  resources: ["leases"]
-  verbs: ["*"]
 {{- end }}
