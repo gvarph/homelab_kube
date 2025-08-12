@@ -32,8 +32,6 @@ victoria-logs-single:
 
 # Kubernetes Event Exporter - exports K8s events to Victoria Logs
 eventExporter:
-  enabled: true
-  
   image:
     repository: ghcr.io/resmoio/kubernetes-event-exporter
     tag: latest

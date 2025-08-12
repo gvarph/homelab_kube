@@ -1,0 +1,16 @@
+# Bind the service account to the cluster role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "victoria-logs.eventExporter.fullname" . }}
+  labels:
+    {{- include "victoria-logs.labels" . | nindent 4 }}
+    app.kubernetes.io/component: event-exporter
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "victoria-logs.eventExporter.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    namespace: {{ .Release.Namespace }}
+    name: {{ include "victoria-logs.eventExporter.serviceAccountName" . }}
