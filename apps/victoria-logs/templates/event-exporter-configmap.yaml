@@ -1,11 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "victoria-logs.eventExporter.fullname" . }}-config
-  namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "victoria-logs.labels" . | nindent 4 }}
-    app.kubernetes.io/component: event-exporter
+  name: {{ .Release.Name }}-event-exporter-config
 data:
   config.yaml: |
     # Kubernetes Event Exporter Configuration

@@ -1,11 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "victoria-logs.eventExporter.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "victoria-logs.labels" . | nindent 4 }}
-    app.kubernetes.io/component: event-exporter
+  name: {{ .Release.Name }}-event-exporter
   annotations:
     # Prometheus metrics scraping
     prometheus.io/scrape: 'true'
@@ -15,11 +11,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "victoria-logs.eventExporter.selectorLabels" . | nindent 6 }}
+      app: {{ .Release.Name }}-event-exporter
   template:
     metadata:
       labels:
-        {{- include "victoria-logs.eventExporter.selectorLabels" . | nindent 8 }}
+        app: {{ .Release.Name }}-event-exporter
       annotations:
         # Prometheus metrics scraping
         prometheus.io/scrape: 'true'
@@ -27,7 +23,7 @@ spec:
         prometheus.io/path: '/metrics'
         checksum/config: {{ include (print $.Template.BasePath "/event-exporter-configmap.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: {{ include "victoria-logs.eventExporter.serviceAccountName" . }}
+      serviceAccountName: {{ .Release.Name }}-event-exporter
       securityContext:
         runAsNonRoot: true
         seccompProfile:
@@ -54,4 +50,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ include "victoria-logs.eventExporter.fullname" . }}-config
+            name: {{ .Release.Name }}-event-exporter-config

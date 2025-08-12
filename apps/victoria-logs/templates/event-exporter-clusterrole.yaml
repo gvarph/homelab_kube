@@ -2,16 +2,20 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "victoria-logs.eventExporter.fullname" . }}
-  labels:
-    {{- include "victoria-logs.labels" . | nindent 4 }}
-    app.kubernetes.io/component: event-exporter
+  name: {{ .Release.Name }}-event-exporter
 rules:
-  # Read access to all resources for event metadata
-  - apiGroups: ["*"]
-    resources: ["*"]
+  # Read access to events
+  - apiGroups: [""]
+    resources: ["events"]
     verbs: ["get", "watch", "list"]
+  # Read access to basic resources for event metadata
+  - apiGroups: [""]
+    resources: ["pods", "services", "nodes", "namespaces"]
+    verbs: ["get", "list"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets", "daemonsets", "statefulsets"]
+    verbs: ["get", "list"]
   # Leader election support
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
-    verbs: ["*"]
+    verbs: ["get", "list", "create", "update", "patch", "watch", "delete"]
